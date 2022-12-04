@@ -1,5 +1,5 @@
 <template>
-  <img :src="photoUrl" alt="photo" width="50" height="50"/>
+  <img :src="photoUrl" alt="photo" width="50" height="50" />
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
 
   computed: {
     photoUrl() {
-      return `http://localhost:4000/api/${
+      return `https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/${
         socket.auth.user_type === "breeder" ? "buyer" : "breeder"
       }/storage/download/temp/${this.photo}`;
     },

@@ -59,7 +59,9 @@ export default {
     getMessages() {
       this.messages = [];
       axios
-        .get(`http://localhost:3000/api/messages/${this.offer._id}`)
+        .get(
+          `https://igmu-chat-server-mmfeljavya-nw.a.run.app/api/messages/${this.offer._id}`
+        )
         .then((response) => {
           console.log(response.data);
           this.messages = response.data.messages;

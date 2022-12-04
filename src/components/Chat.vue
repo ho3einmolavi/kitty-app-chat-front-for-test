@@ -4,7 +4,7 @@
       <div class="title" v-if="unread_offers_count">
         <h4
           v-for="(key, index) in Object.keys(unread_offers_count)"
-          :key="index" 
+          :key="index"
           @click="getOffers(key)"
         >
           {{ key }} +{{ unread_offers_count[key].count }}
@@ -92,14 +92,17 @@ export default {
       }
       if (socket.auth.user_type === "buyer") {
         axios
-          .get(`http://localhost:4000/api/buyer/cat/offers/by-status/${type}`, {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem(
-                `${socket.auth.user_type}_token`
-              )}`,
-            },
-          })
+          .get(
+            `https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/buyer/cat/offers/by-status/${type}`,
+            {
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem(
+                  `${socket.auth.user_type}_token`
+                )}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response.data);
             this.offers = response.data.data.offers;
@@ -109,14 +112,17 @@ export default {
           });
       } else {
         axios
-          .get(`http://localhost:4000/api/breeder/offer/by-status/${type}`, {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem(
-                `${socket.auth.user_type}_token`
-              )}`,
-            },
-          })
+          .get(
+            `https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/breeder/offer/by-status/${type}`,
+            {
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem(
+                  `${socket.auth.user_type}_token`
+                )}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response.data);
             this.offers = response.data.data.offers;
@@ -131,14 +137,17 @@ export default {
     socket.on("connect", () => {
       if (socket.auth.user_type === "breeder") {
         axios
-          .get("http://localhost:4000/api/breeder/offer/by-status/0", {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem(
-                `${socket.auth.user_type}_token`
-              )}`,
-            },
-          })
+          .get(
+            "https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/breeder/offer/by-status/0",
+            {
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem(
+                  `${socket.auth.user_type}_token`
+                )}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response.data);
             this.offers = response.data.data.offers;
@@ -148,14 +157,17 @@ export default {
           });
 
         axios
-          .get("http://localhost:4000/api/breeder/offer/unreed/count", {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem(
-                `${socket.auth.user_type}_token`
-              )}`,
-            },
-          })
+          .get(
+            "https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/breeder/offer/unreed/count",
+            {
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem(
+                  `${socket.auth.user_type}_token`
+                )}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response.data);
             this.unread_offers_count = response.data.data.unread_offers;
@@ -166,14 +178,17 @@ export default {
           });
       } else {
         axios
-          .get(`http://localhost:4000/api/buyer/cat/offers/by-status/0`, {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem(
-                `${socket.auth.user_type}_token`
-              )}`,
-            },
-          })
+          .get(
+            `https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/buyer/cat/offers/by-status/0`,
+            {
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem(
+                  `${socket.auth.user_type}_token`
+                )}`,
+              },
+            }
+          )
           .then((response) => {
             console.log(response.data);
             this.offers = response.data.data.offers;
