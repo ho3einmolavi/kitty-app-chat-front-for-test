@@ -33,6 +33,7 @@
       :offer="selectedOffer"
       @input="onMessage"
       class="right-panel"
+      :loading="loading"
     />
   </div>
 </template>
@@ -51,11 +52,13 @@ export default {
       selectedOffer: null,
       offers: [],
       unread_offers_count: null,
+      loading: false,
     };
   },
   methods: {
     onMessage(content) {
       if (this.selectedOffer) {
+        this.loading = true;
         const type = socket.auth.user_type;
         socket.emit("sendMessage", {
           content_type: "text",
@@ -71,10 +74,6 @@ export default {
           },
           offer_id: this.selectedOffer._id,
         });
-        // this.selectedUser.messages.push({
-        //   content,
-        //   fromSelf: true,
-        // });
       }
     },
     onSelectOffer(offer) {
@@ -134,6 +133,9 @@ export default {
     },
   },
   created() {
+    socket.on('message_sent', () => {
+      this.loading = false
+    });
     socket.on("connect", () => {
       if (socket.auth.user_type === "breeder") {
         axios
@@ -179,7 +181,7 @@ export default {
       } else {
         axios
           .get(
-            `https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/buyer/cat/offers/by-status/0`,
+            `https://kittyapp-io-apis-mmfeljavya-nw.a.run.app/api/buyer/offer/by-status/0`,
             {
               headers: {
                 Accept: "application/json",

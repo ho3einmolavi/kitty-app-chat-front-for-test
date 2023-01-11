@@ -20,6 +20,7 @@
           {{ isSender(message) ? "(you)" : "other side" }}
         </div>
         {{ message.content }}
+        <div v-if="loading && index === messages.length - 1">⏳</div>
       </li>
     </ul>
 
@@ -40,6 +41,7 @@ export default {
 
   props: {
     offer: Object,
+    loading: Boolean,
   },
   data() {
     return {
