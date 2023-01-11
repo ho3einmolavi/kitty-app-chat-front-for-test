@@ -60,7 +60,7 @@ export default {
       if (this.selectedOffer) {
         this.loading = true;
         const type = socket.auth.user_type;
-        socket.emit("sendMessage", {
+        socket.emit("send_message", {
           content_type: "text",
           content,
           sender: {
@@ -133,8 +133,8 @@ export default {
     },
   },
   created() {
-    socket.on('message_sent', () => {
-      this.loading = false
+    socket.on("message_sent", () => {
+      this.loading = false;
     });
     socket.on("connect", () => {
       if (socket.auth.user_type === "breeder") {
